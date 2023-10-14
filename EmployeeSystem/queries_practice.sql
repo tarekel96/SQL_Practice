@@ -180,3 +180,17 @@ SELECT
 	DateReceived, DateSentToCompany, DateSentToCompany - DateReceived as NumOfDaysToProcess
 FROM ConsumerComplaints
 WHERE ComplaintID = 468882;
+
+SELECT 
+	cc.ProductName, AVG(cc.DateSentToCompany - cc.DateReceived) as AvgNumOfDays
+FROM ConsumerComplaints cc
+GROUP BY cc.ProductName
+ORDER BY AvgNumOfDays DESC;
+
+/*
+What index(es) would you create to improve the performance
+of the above query and why? Show SQL command(s). (Hint:
+Is an index on DateSubmitted or on DateReceived useful?)
+*/
+
+CREATE INDEX ON ConsumerComplaints(ProductName);
